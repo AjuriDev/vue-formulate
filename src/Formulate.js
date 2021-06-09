@@ -13,6 +13,7 @@ import FormulateForm from './FormulateForm.vue'
 import FormulateInput from './FormulateInput.vue'
 import FormulateErrors from './FormulateErrors.vue'
 import FormulateHelp from './slots/FormulateHelp.vue'
+import FormulateHelpToggle from './slots/FormulateHelpToggle.vue'
 import FormulateFile from './slots/FormulateFile.vue'
 import FormulateGrouping from './FormulateGrouping.vue'
 import FormulateLabel from './slots/FormulateLabel.vue'
@@ -46,6 +47,7 @@ class Formulate {
         FormulateForm,
         FormulateFile,
         FormulateHelp,
+        FormulateHelpToggle,
         FormulateLabel,
         FormulateInput,
         FormulateErrors,
@@ -73,6 +75,7 @@ class Formulate {
         errors: 'FormulateErrors',
         file: 'FormulateFile',
         help: 'FormulateHelp',
+        helpToggle: 'FormulateHelpToggle',
         label: 'FormulateLabel',
         prefix: false,
         remove: 'FormulateRepeatableRemove',

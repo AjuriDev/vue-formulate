@@ -12,6 +12,7 @@ export const classKeys = [
   'element',
   'input',
   'help',
+  'helpToggle',
   'errors',
   'error',
   // Box
@@ -91,6 +92,9 @@ const classModifiers = (base, classKey, context) => {
       break
     case 'help':
       modifiers.push(`${base}--${context.helpPosition}`)
+      break
+    case 'helpToggle':
+      modifiers.push(`${base}--${context.helpTogglePosition}`)
       break
     case 'form':
       if (context.name) {

@@ -107,6 +107,7 @@ export default {
         showValidationErrors,
         rootEmit,
         help,
+        helpToggle,
         pseudoProps,
         rules,
         model,

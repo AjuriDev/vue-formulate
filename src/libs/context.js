@@ -27,6 +27,8 @@ export default {
       hasValidationErrors: this.hasValidationErrors.bind(this),
       help: this.help,
       helpPosition: this.logicalHelpPosition,
+      helpToggle: this.helpToggle,
+      helpTogglePosition: this.logicalHelpTogglePosition,
       id: this.id || this.defaultId,
       ignored: has(this.$options.propsData, 'ignored'),
       isValid: this.isValid,
@@ -66,6 +68,7 @@ export default {
   elementAttributes,
   logicalLabelPosition,
   logicalHelpPosition,
+  logicalHelpTogglePosition,
   mergedRemovePosition,
   mergedUploadUrl,
   mergedGroupErrors,
@@ -192,6 +195,10 @@ function elementAttributes () {
     attrs['aria-describedby'] = `${attrs.id}-help`
   }
 
+  // if (this.helpToggle && !has(attrs, 'aria-describedby')) {
+  //   attrs['aria-describedby'] = `${attrs.id}-help-toggle`
+  // }
+
   // Ensure we dont have a class attribute unless we are actually applying classes.
   if (this.classes.input && (!Array.isArray(this.classes.input) || this.classes.input.length)) {
     attrs.class = this.classes.input
@@ -215,6 +222,7 @@ function classes () {
       hasErrors: this.hasVisibleErrors,
       hasValue: this.hasValue,
       helpPosition: this.logicalHelpPosition,
+      helpTogglePosition: this.logicalHelpTogglePosition,
       isValid: this.isValid,
       labelPosition: this.logicalLabelPosition,
       type: this.type,
@@ -245,6 +253,18 @@ function logicalLabelPosition () {
 function logicalHelpPosition () {
   if (this.helpPosition) {
     return this.helpPosition
+  }
+  switch (this.classification) {
+    case 'group':
+      return 'before'
+    default:
+      return 'after'
+  }
+}
+
+function logicalHelpTogglePosition () {
+  if (this.helpTogglePosition) {
+    return this.helpTogglePosition
   }
   switch (this.classification) {
     case 'group':
@@ -472,6 +492,7 @@ function slotComponents () {
     errors: fn(this.type, 'errors'),
     file: fn(this.type, 'file'),
     help: fn(this.type, 'help'),
+    helpToggle: fn(this.type, 'helpToggle'),
     label: fn(this.type, 'label'),
     prefix: fn(this.type, 'prefix'),
     remove: fn(this.type, 'remove'),
@@ -489,6 +510,7 @@ function slotProps () {
   return {
     label: fn(this.type, 'label', this.typeProps),
     help: fn(this.type, 'help', this.typeProps),
+    helpToggle: fn(this.type, 'helpToggle', this.typeProps),
     errors: fn(this.type, 'errors', this.typeProps),
     repeatable: fn(this.type, 'repeatable', this.typeProps),
     addMore: fn(this.type, 'addMore', this.typeProps),

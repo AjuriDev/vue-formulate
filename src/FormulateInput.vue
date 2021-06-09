@@ -33,6 +33,18 @@
         />
       </slot>
       <slot
+        v-if="context.helpTogglePosition === 'before'"
+        name="helpToggle"
+        v-bind="context"
+      >
+        <component
+          :is="context.slotComponents.helpToggle"
+          v-if="context.helpToggle"
+          v-bind="context.slotProps.helpToggle"
+          :context="context"
+        />
+      </slot>
+      <slot
         name="element"
         v-bind="context"
       >
@@ -68,6 +80,18 @@
         v-if="context.help"
         :context="context"
         v-bind="context.slotProps.help"
+      />
+    </slot>
+    <slot
+      v-if="context.helpTogglePosition === 'after'"
+      name="helpToggle"
+      v-bind="context"
+    >
+      <component
+        :is="context.slotComponents.helpToggle"
+        v-if="context.helpToggle"
+        :context="context"
+        v-bind="context.slotProps.helpToggle"
       />
     </slot>
     <slot
@@ -167,6 +191,14 @@ export default {
       default: false
     },
     helpPosition: {
+      type: [String, Boolean],
+      default: false
+    },
+    helpToggle: {
+      type: [String, Boolean],
+      default: false
+    },
+    helpPositionToggle: {
       type: [String, Boolean],
       default: false
     },
