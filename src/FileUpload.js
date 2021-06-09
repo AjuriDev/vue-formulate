@@ -209,7 +209,14 @@ class FileUpload {
       this.fileList = transfer.files
       this.input.files = this.fileList
     } else {
-      this.fileList = this.fileList.filter(file => file && file.__id !== uuid)
+      if (FileList.prototype.filter) {
+        this.fileList = this.fileList.filter(file => file && file.__id !== uuid)
+      } else {
+        // const testInputFiles = document.createElement('input')
+        // testInputFiles.setAttribute('type', 'file')
+        // this.fileList = testInputFiles.files
+        this.input.value = ''
+      }
     }
     if (originalLength > this.files.length) {
       this.context.rootEmit('file-removed', this.files)
@@ -240,7 +247,12 @@ class FileUpload {
     this.context.performValidation()
     this.loadPreviews()
     if (this.context.uploadBehavior !== 'delayed') {
-      this.upload()
+      this.upload().finally(() => {
+        if (FileList.prototype.filter) {
+          input.value = ''
+          this.input.value = ''
+        }
+      })
     }
   }
 
